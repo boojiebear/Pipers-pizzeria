@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Pipers Pizzeria </title>
+
+
+    </head>
+
+
+    <body>
+        <h1>Pipers Pizzeria</h1>
+        <h2>An italian Australian Pizza resturant</h2>
+       <link rel="stylesheet" href="style.html">
+
+<link href="link rel="preconnect href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
+
+
+
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy
+            text ever since the 1500s, when an unknown printer took a galley
+            of type and scrambled it to make a type specimen book
+
+
+        </p>
+     <b>pipers pizzeria</b>
+
+<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"target="_blank"> click this link for free 40% discount</a>
+<link>
+
+<table border="10" cell padding "8" cell spacing "1"> 
+    <tr>
+        <th>3 Months</th>
+        <th>Popularity</th>
+        <th>Costs</th>
+        <th>Quality</th>
+    </tr>
+    <tr>
+        <td>june,july,august</td>
+        <td>Fully booked</td>
+        <td>$20</td>
+        <td>10/10</td>
+    </tr>
+</table>
