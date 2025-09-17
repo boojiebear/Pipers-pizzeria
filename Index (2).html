@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Italian Menu</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #f5e6d3 0%, #e8d5c4 100%);
+      font-family: 'Open Sans', sans-serif;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+
+
+    
+    
+
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    
+    /* Pizza Illustration */
+    .pizza-illustration {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 300px;
+      z-index: 1;
+    }
+    
+    .pizza {
+      width: 100%;
+      height: 100%;
+      background: #f4d03f;
+      border-radius: 50%;
+      position: relative;
+      border: 8px solid #e67e22;
+    }
+    
+    .pizza-slice-line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 50%;
+      background: #2c3e50;
+      transform-origin: bottom;
+    }
+    
+    .slice1 { transform: translate(-50%, -100%) rotate(0deg); }
+    .slice2 { transform: translate(-50%, -100%) rotate(45deg); }
+    .slice3 { transform: translate(-50%, -100%) rotate(90deg); }
+    .slice4 { transform: translate(-50%, -100%) rotate(135deg); }
+    .slice5 { transform: translate(-50%, -100%) rotate(180deg); }
+    .slice6 { transform: translate(-50%, -100%) rotate(225deg); }
+    .slice7 { transform: translate(-50%, -100%) rotate(270deg); }
+    .slice8 { transform: translate(-50%, -100%) rotate(315deg); }
+    
+    .pizza-topping {
+      position: absolute;
+      border-radius: 50%;
+    }
+    
+    .pepperoni {
+      width: 25px;
+      height: 25px;
+      background: #c0392b;
+    }
+    
+    .tomato {
+      width: 20px;
+      height: 15px;
+      background: #e74c3c;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    }
+    
+    .basil {
+      width: 15px;
+      height: 25px;
+      background: #27ae60;
+      border-radius: 50% 0 50% 0;
+      transform: rotate(45deg);
+    }
+    
+    /* Position toppings */
+    .pepperoni:nth-child(10) { top: 30%; left: 40%; }
+    .pepperoni:nth-child(11) { top: 50%; left: 20%; }
+    .pepperoni:nth-child(12) { top: 60%; left: 60%; }
+    .pepperoni:nth-child(13) { top: 25%; left: 65%; }
+    
+    .tomato:nth-child(14) { top: 40%; left: 70%; }
+    .tomato:nth-child(15) { top: 70%; left: 30%; }
+    .tomato:nth-child(16) { top: 35%; left: 25%; }
+    
+    .basil:nth-child(17) { top: 45%; left: 45%; }
+    .basil:nth-child(18) { top: 55%; left: 75%; }
+    .basil:nth-child(19) { top: 65%; left: 15%; }
+    
+    /* Salad Bowl */
+    .salad-bowl {
+      position: absolute;
+      top: 30%;
+      right: 5%;
+      width: 200px;
+      height: 150px;
+      z-index: 1;
+    }
+    
+    .bowl {
+      width: 100%;
+      height: 100%;
+      background: #2c3e50;
+      border-radius: 50% 50% 50% 50% / 60% 60% 90% 90%;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .salad-content {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 60%;
+    }
+    
+    .lettuce {
+      position: absolute;
+      width: 20px;
+      height: 15px;
+      background: #27ae60;
+      border-radius: 50% 50% 0 0;
+    }
+    
+    .cherry-tomato {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #e74c3c;
+      border-radius: 50%;
+    }
+    
+    .olive {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #2c3e50;
+      border-radius: 50%;
+    }
+    
+    /* Fries */
+    .fries {
+      position: absolute;
+      top: 40%;
+      right: 2%;
+      width: 60px;
+      height: 120px;
+      z-index: 1;
+    }
+    
+    .fries-container {
+      width: 100%;
+      height: 100%;
+      background: #e67e22;
+      border-radius: 0 0 10px 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .fry {
+      position: absolute;
+      width: 4px;
+      background: #f39c12;
+      border-radius: 2px 2px 0 0;
+      bottom: 20%;
+    }
+    
+    /* Main Content */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 150px;
+      position: relative;
+      z-index: 3;
+    }
+    
+    .menu-section {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: #e67e22;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+    
+    .section-title:hover {
+      color: #c0392b;
+    }
+    
+    .section-title::after {
+      content: '▼';
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .section-title.collapsed::after {
+      transform: translateY(-50%) rotate(-90deg);
+    }
+    
+    .menu-content {
+      max-height: 1000px;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+    
+    .menu-content.collapsed {
+      max-height: 0;
+      opacity: 0;
+    }
+    
+    .menu-item {
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed rgba(230, 126, 34, 0.3);
+    }
+    
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+    
+    .item-name {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #e67e22;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .item-price {
+      font-weight: 700;
+      color: #c0392b;
+    }
+    
+    .item-description {
+      color: #7f8c8d;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      font-weight: 300;
+    }
+    
+    /* Pizza Size Options */
+    .pizza-sizes {
+      display: flex;
+      justify-content: space-around;
+      margin: 30px 0;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .size-option {
+      background: #e67e22;
+      color: white;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      box-shadow: 0 4px 16px rgba(230, 126, 34, 0.3);
+      transition: transform 0.3s ease;
+    }
+    
+    .size-option:hover {
+      transform: scale(1.1);
+    }
+    
+    .size-name {
+      font-size: 1.1rem;
+      margin-bottom: 2px;
+    }
+    
+    .size-price {
+      font-size: 0.9rem;
+    }
+    
+    .base-info {
+      text-align: center;
+      margin: 20px 0;
+      color: #e67e22;
+      font-weight: 600;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .section-title {
+        font-size: 2.5rem;
+      }
+      
+      .pizza-illustration {
+        width: 250px;
+        height: 250px;
+      }
+      
+      .salad-bowl, .fries {
+        display: none;
+      }
+      
+      .pizza-sizes {
+        justify-content: center;
+      }
+      
+      .size-option {
+        width: 70px;
+        height: 70px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Pizza Illustration -->
+    <div class="pizza-illustration">
+      <div class="pizza">
+        <div class="pizza-slice-line slice1"></div>
+        <div class="pizza-slice-line slice2"></div>
+        <div class="pizza-slice-line slice3"></div>
+        <div class="pizza-slice-line slice4"></div>
+        <div class="pizza-slice-line slice5"></div>
+        <div class="pizza-slice-line slice6"></div>
+        <div class="pizza-slice-line slice7"></div>
+        <div class="pizza-slice-line slice8"></div>
+        <div class="pizza-topping pepperoni"></div>
+        <div class="pizza-topping pepperoni"></div>
+        <div class="pizza-topping pepperoni"></div>
+        <div class="pizza-topping pepperoni"></div>
+        <div class="pizza-topping tomato"></div>
+        <div class="pizza-topping tomato"></div>
+        <div class="pizza-topping tomato"></div>
+        <div class="pizza-topping basil"></div>
+        <div class="pizza-topping basil"></div>
+        <div class="pizza-topping basil"></div>
+      </div>
+    </div>
+
+    <!-- Salad Bowl -->
+    <div class="salad-bowl">
+      <div class="bowl">
+        <div class="salad-content">
+          <div class="lettuce" style="top: 20%; left: 30%;"></div>
+          <div class="lettuce" style="top: 40%; left: 60%;"></div>
+          <div class="lettuce" style="top: 60%; left: 20%;"></div>
+          <div class="lettuce" style="top: 50%; left: 70%;"></div>
+          <div class="cherry-tomato" style="top: 30%; left: 50%;"></div>
+          <div class="cherry-tomato" style="top: 65%; left: 45%;"></div>
+          <div class="cherry-tomato" style="top: 25%; left: 75%;"></div>
+          <div class="olive" style="top: 45%; left: 40%;"></div>
+          <div class="olive" style="top: 55%; left: 25%;"></div>
+          <div class="olive" style="top: 35%; left: 80%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fries -->
+    <div class="fries">
+      <div class="fries-container">
+        <div class="fry" style="left: 10%; height: 60%;"></div>
+        <div class="fry" style="left: 20%; height: 70%;"></div>
+        <div class="fry" style="left: 30%; height: 65%;"></div>
+        <div class="fry" style="left: 40%; height: 75%;"></div>
+        <div class="fry" style="left: 50%; height: 55%;"></div>
+        <div class="fry" style="left: 60%; height: 68%;"></div>
+        <div class="fry" style="left: 70%; height: 72%;"></div>
+        <div class="fry" style="left: 80%; height: 58%;"></div>
+      </div>
+    </div>
+
+    <!-- Menu Grid -->
+    <div class="menu-grid">
+      <!-- Mains Section -->
+      <div class="menu-section">
+        <h2 class="section-title collapsed" onclick="toggleSection(this)">Mains</h2>
+        
+        <div class="menu-content collapsed">
+          <div class="menu-item">
+            <div class="item-name">Pepperoni</div>
+            <div class="item-description">tomato sauce, pepperoni, mozzarella</div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">Margherita</div>
+            <div class="item-description">tomato sauce, extra-virgin olive oil, fresh mozzarella, basil leaves</div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">vegaterain</div>
+            <div class="item-description">tomato sauce, vegaterain cheese, olives, basil leaves</div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">El Diablo</div>
+            <div class="item-description">Tomato sauce, Hot sauce, Spicy salami, Red pepper, Olives</div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">Magma Melt</div>
+            <div class="item-description">tomato sauce, mozzarella cheese, chili flakes, with smoked paprika</div>
+          </div>
+
+          <!-- Pizza Sizes -->
+          <div class="pizza-sizes">
+            <div class="size-option">
+              <div class="size-name">6"</div>
+              <div class="size-price">$10.90</div>
+            </div>
+            <div class="size-option">
+              <div class="size-name">12"</div>
+              <div class="size-price">$15.90</div>
+            </div>
+            <div class="size-option">
+              <div class="size-name">15"</div>
+              <div class="size-price">$20.90</div>
+            </div>
+          </div>
+
+          <div class="base-info">
+            <div>Regular Base $4.50</div>
+            <div>Gluten Free Base +$5</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sides and Desserts Section -->
+      <div class="menu-section">
+        <h2 class="section-title collapsed" onclick="toggleSection(this)">Sides</h2>
+        
+        <div class="menu-content collapsed">
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Bruschetta with tomato and basil (4 pieces)</span>
+              <span class="item-price">$20</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Spicy Garlic Bread</span>
+              <span class="item-price">$6</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Chips & Sauce</span>
+              <span class="item-price">$6</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Chicken nugget</span>
+              <span class="item-price">$7</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Salad</span>
+              <span class="item-price">$12</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>meatballs</span>
+              <span class="item-price">$12.50</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>arancini balls</span>
+              <span class="item-price">$13</span>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="section-title collapsed" onclick="toggleSection(this)" style="margin-top: 40px;">Desserts</h2>
+        
+        <div class="menu-content collapsed">
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Gelato</span>
+              <span class="item-price">$5</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Tiramisu</span>
+              <span class="item-price">$14</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Cheesecake</span>
+              <span class="item-price">$12</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Cannoli</span>
+              <span class="item-price">$19</span>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="section-title collapsed" onclick="toggleSection(this)" style="margin-top: 40px;">Drinks</h2>
+        
+        <div class="menu-content collapsed">
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Classic lemonade</span>
+              <span class="item-price">$4</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Lemon lime bitters(non alc)</span>
+              <span class="item-price">$6</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Fizzy drinks</span>
+              <span class="item-price">$3.50</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Ginger beer</span>
+              <span class="item-price">$5.50</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>Fruit juices(small, medium, large)</span>
+              <span class="item-price">$7</span>
+            </div>
+          </div>
+          
+          <div class="menu-item">
+            <div class="item-name">
+              <span>alcholic drinks(Limoncello, grappa, sambuca)</span>
+              <span class="item-price">$5.50</span>
+            </div>
+          </div>
+
+          <div class="challenge-section" style="background: rgba(230, 126, 34, 0.1); padding: 25px; border-radius: 15px; margin: 30px 0; text-align: center;">
+            <h3 style="color: #e67e22; font-size: 1.5rem; font-weight: 700; margin-bottom: 15px;">THE CHALLENGE $17</h3>
+            <p style="color: #e67e22; font-weight: 600; line-height: 1.5; margin-bottom: 10px;">
+              3 of our hottest pizzas topped with finely sliced carolina reaper and ghost peppers, and our spicy garlic bread.
+            </p>
+            <p style="color: #e67e22; font-weight: 600; line-height: 1.5;">
+              If you win $100 gift card to pipers pizzeria and T shirt. But if you lose you have a photo on the wall of failures
+            </p>
+          </div>
+
+          <div class="restaurant-info" style="text-align: center; margin-top: 40px;">
+            <h2 style="color: #2c3e50; font-size: 2.5rem; font-weight: 700; margin-bottom: 15px;">Open 7 days<br>a week!</h2>
+            
+            <div style="margin: 30px 0;">
+              <h1 style="color: #e67e22; font-size: 3rem; font-weight: 700; margin-bottom: 10px;">PIPING<br>PIZZERIA</h1>
+              <p style="color: #e67e22; font-size: 1.5rem; font-weight: 600;">+61 644-2182</p>
+              <p style="color: #e67e22; font-weight: 600;">18 cheesy St.Melbourne</p>
+              <p style="color: #e67e22; font-weight: 600;">www.Pipingpizzeria.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<img> <source> "m.png"
+  <script>
+    function toggleSection(element) {
+      const content = element.nextElementSibling;
+      const isCollapsed = content.classList.contains('collapsed');
+      
+      if (isCollapsed) {
+        // Expand
+        element.classList.remove('collapsed');
+        content.classList.remove('collapsed');
+      } else {
+        // Collapse
+        element.classList.add('collapsed');
+        content.classList.add('collapsed');
+      }
+    }
+  </script>
+</body>
+</html>
