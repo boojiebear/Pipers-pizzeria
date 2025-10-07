@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Piping Pizzeria - Menu</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; }
+    body { 
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; 
+      background: #f8f5f0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border: 8px double red;
+      border-radius: 20px;
+      background: #fffbe6;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      font-family: "Italianno", cursive;
+      font-size: 72px;
+      line-height: 1.1;
+      margin: 1rem 0;
+      text-align: center;
+      color: darkred;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    h2 { 
+      margin: 0 1rem 1.5rem; 
+      font-weight: 500; 
+      text-align: center; 
+      color: #444;
+    }
+
+    nav {
+      background: red;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      justify-content: space-around;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      display: block;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    nav ul li a:hover,
+    nav ul li a:focus-visible,
+    nav ul li a:active { 
+      background: white;
+      color: red;
+      outline: none;
+    }
+
+    main { padding: 1rem; }
+
+    .challenge-section {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+      border: 3px solid darkred;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .challenge-section h3 {
+      color: white;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .challenge-section p {
+      color: #fff9e6;
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
+      font-size: 1.05rem;
+    }
+
+    .challenge-price {
+      font-size: 2.5rem;
+      color: #ffed4e;
+      font-weight: bold;
+      margin: 1rem 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    }
+
+    .menu-section {
+      margin: 2rem 0;
+    }
+
+    .menu-category {
+      margin-bottom: 1.5rem;
+      border: 2px solid red;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .category-header {
+      background: red;
+      color: white;
+      padding: 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .category-header:hover {
+      background: darkred;
+    }
+
+    .category-header span {
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+    }
+
+    .category-header.active span {
+      transform: rotate(180deg);
+    }
+
+    .category-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: white;
+    }
+
+    .category-content.active {
+      max-height: 2000px;
+    }
+
+    .menu-item {
+      padding: 1rem;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-info h3 {
+      color: darkred;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .item-description {
+      color: #666;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .item-price {
+      font-weight: bold;
+      color: red;
+      font-size: 1.2rem;
+      white-space: nowrap;
+      margin-left: 1rem;
+    }
+
+    .pizza-sizes {
+      background: #f9f9f9;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .pizza-sizes h4 {
+      color: darkred;
+      margin-bottom: 0.8rem;
+    }
+
+    .size-options {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .size-option {
+      text-align: center;
+    }
+
+    .size-circle {
+      background: coral;
+      color: white;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.5rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .size-circle .size {
+      font-size: 1.3rem;
+    }
+
+    .size-circle .price {
+      font-size: 0.9rem;
+    }
+
+    .base-info {
+      margin-top: 1rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Piping Pizzeria</h1>
+    <h2>Our Delicious Menu</h2>
+
+    <!-- Navigation -->
+    <nav>
+      <ul>
+        <li><a href="https://boojiebear.github.io/Pipers-pizzeria/#">Home</a></li>
+        <li><a href="https://boojiebear.github.io/Pipers-pizzeria/menu.html">Menu</a></li>
+        <li><a href="https://boojiebear.github.io/Pipers-pizzeria/booking.html">Bookings</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <!-- The Challenge -->
+      <div class="challenge-section">
+        <h3>THE CHALLENGE</h3>
+        <div class="challenge-price">$17</div>
+        <p>3 of our hottest pizzas topped with finely sliced carolina reaper and ghost peppers, and our spicy garlic bread.</p>
+        <p><strong>If you win $100 gift card to piping pizzeria and T shirt. But if you lose you have a photo on the wall of failures</strong></p>
+      </div>
+
+      <div class="menu-section">
+        
+        <!-- Mains / Pizzas -->
+        <div class="menu-category">
+          <div class="category-header" onclick="toggleCategory(this)">
+            Mains
+            <span>▼</span>
+          </div>
+          <div class="category-content">
+            <div class="pizza-sizes">
+              <h4>Pizza Sizes Available</h4>
+              <div class="size-options">
+                <div class="size-option">
+                  <div class="size-circle">
+                    <div class="size">6"</div>
+                    <div class="price">$10.90</div>
+                  </div>
+                  <div>Small</div>
+                </div>
+                <div class="size-option">
+                  <div class="size-circle">
+                    <div class="size">12"</div>
+                    <div class="price">$15.90</div>
+                  </div>
+                  <div>Medium</div>
+                </div>
+                <div class="size-option">
+                  <div class="size-circle">
+                    <div class="size">15"</div>
+                    <div class="price">$20.90</div>
+                  </div>
+                  <div>Large</div>
+                </div>
+              </div>
+              <div class="base-info">
+                <strong>Regular Base $4.50</strong> | Gluten Free Base +$5
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Pepperoni</h3>
+                <p class="item-description">tomato sauce, pepperoni, mozzarella</p>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Margherita</h3>
+                <p class="item-description">tomato sauce, extra-virgin olive oil, fresh mozzarella, basil leaves</p>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Vegaterain</h3>
+                <p class="item-description">tomato sauce, vegaterain cheese, olives, basil leaves</p>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>El Diablo</h3>
+                <p class="item-description">Tomato sauce, Hot sauce, Spicy salami, Red pepper, Olives</p>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Magma Melt</h3>
+                <p class="item-description">tomato sauce, mozzarella cheese, chili flakes, with smoked paprika</p>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Pasta</h3>
+                <p class="item-description">tomato sauce, grated parmesan, basil leaves, with salt and pepper.</p>
+              </div>
+              <div class="item-price">$15</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Risotto</h3>
+                <p class="item-description">Rice, fresh parsley, butter, garlic cloves, grated parmesan</p>
+              </div>
+              <div class="item-price">$18</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Garlic Shrimp</h3>
+                <p class="item-description">tomato sauce, marinated shrimp, caramelised onion, fetta cheese</p>
+              </div>
+              <div class="item-price">$13</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sides -->
+        <div class="menu-category">
+          <div class="category-header" onclick="toggleCategory(this)">
+            Sides
+            <span>▼</span>
+          </div>
+          <div class="category-content">
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Bruschetta with tomato and basil (4 pieces)</h3>
+              </div>
+              <div class="item-price">$20</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Spicy Garlic Bread</h3>
+              </div>
+              <div class="item-price">$6</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Chips & Sauce</h3>
+              </div>
+              <div class="item-price">$6</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Chicken nugget</h3>
+              </div>
+              <div class="item-price">$7</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Salad</h3>
+              </div>
+              <div class="item-price">$12</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Meatballs</h3>
+              </div>
+              <div class="item-price">$12.50</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Arancini balls</h3>
+              </div>
+              <div class="item-price">$13</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desserts -->
+        <div class="menu-category">
+          <div class="category-header" onclick="toggleCategory(this)">
+            Desserts
+            <span>▼</span>
+          </div>
+          <div class="category-content">
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Gelato</h3>
+              </div>
+              <div class="item-price">$5</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Tiramisu</h3>
+              </div>
+              <div class="item-price">$14</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Cheesecake</h3>
+              </div>
+              <div class="item-price">$12</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Cannoli</h3>
+              </div>
+              <div class="item-price">$19</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Drinks -->
+        <div class="menu-category">
+          <div class="category-header" onclick="toggleCategory(this)">
+            Drinks
+            <span>▼</span>
+          </div>
+          <div class="category-content">
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Classic lemonade</h3>
+              </div>
+              <div class="item-price">$4</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Lemon lime bitters (non alc)</h3>
+              </div>
+              <div class="item-price">$6</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Fizzy drinks</h3>
+              </div>
+              <div class="item-price">$3.50</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Ginger beer</h3>
+              </div>
+              <div class="item-price">$5.50</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Fruit juices (small, medium, large)</h3>
+              </div>
+              <div class="item-price">$7</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-info">
+                <h3>Alcholic drinks (Limoncello, grappa, sambuca)</h3>
+              </div>
+              <div class="item-price">$5.50</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleCategory(header) {
+      const content = header.nextElementSibling;
+      const allHeaders = document.querySelectorAll('.category-header');
+      const allContents = document.querySelectorAll('.category-content');
+      
+      // Close all other sections
+      allHeaders.forEach(h => {
+        if (h !== header) {
+          h.classList.remove('active');
+        }
+      });
+      allContents.forEach(c => {
+        if (c !== content) {
+          c.classList.remove('active');
+        }
+      });
+      
+      // Toggle current section
+      header.classList.toggle('active');
+      content.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
